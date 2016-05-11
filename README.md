@@ -1,2 +1,3 @@
-# ubirch-kinetis-sdk
+# Kinetis SDK
+
 Repository for registered download SDK files.
