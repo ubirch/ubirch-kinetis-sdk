@@ -373,7 +373,8 @@ status_t FTM_SetupPwm(FTM_Type *base,
             reg &= ~(FTM_CnSC_MSA_MASK | FTM_CnSC_MSB_MASK | FTM_CnSC_ELSA_MASK | FTM_CnSC_ELSB_MASK);
 
             /* Setup the active level */
-            reg |= (FTM_CnSC_ELSA(chnlParams->level) | FTM_CnSC_ELSB(chnlParams->level));
+            reg |= chnlParams->level == kFTM_HighTrue ? 8 : (FTM_CnSC_ELSA(chnlParams->level) | FTM_CnSC_ELSB(chnlParams->level));
+//            reg |= (FTM_CnSC_ELSA(chnlParams->level) | FTM_CnSC_ELSB(chnlParams->level));
 
             /* Edge-aligned mode needs MSB to be 1, don't care for Center-aligned mode */
             reg |= FTM_CnSC_MSB(1U);
@@ -445,7 +446,8 @@ status_t FTM_SetupPwm(FTM_Type *base,
             reg &= ~(FTM_CnSC_MSA_MASK | FTM_CnSC_MSB_MASK | FTM_CnSC_ELSA_MASK | FTM_CnSC_ELSB_MASK);
 
             /* Setup the active level for channel n */
-            reg |= (FTM_CnSC_ELSA(chnlParams->level) | FTM_CnSC_ELSB(chnlParams->level));
+            reg |= chnlParams->level == kFTM_HighTrue ? 8 : (FTM_CnSC_ELSA(chnlParams->level) | FTM_CnSC_ELSB(chnlParams->level));
+//            reg |= (FTM_CnSC_ELSA(chnlParams->level) | FTM_CnSC_ELSB(chnlParams->level));
 
             /* Update the mode and edge level for channel n */
             base->CONTROLS[chnlParams->chnlNumber * 2].CnSC = reg;
@@ -455,7 +457,8 @@ status_t FTM_SetupPwm(FTM_Type *base,
             reg &= ~(FTM_CnSC_MSA_MASK | FTM_CnSC_MSB_MASK | FTM_CnSC_ELSA_MASK | FTM_CnSC_ELSB_MASK);
 
             /* Setup the active level for channel n + 1 */
-            reg |= (FTM_CnSC_ELSA(chnlParams->level) | FTM_CnSC_ELSB(chnlParams->level));
+            reg |= chnlParams->level == kFTM_HighTrue ? 8 : (FTM_CnSC_ELSA(chnlParams->level) | FTM_CnSC_ELSB(chnlParams->level));
+//            reg |= (FTM_CnSC_ELSA(chnlParams->level) | FTM_CnSC_ELSB(chnlParams->level));
 
             /* Update the mode and edge level for channel n + 1*/
             base->CONTROLS[(chnlParams->chnlNumber * 2) + 1].CnSC = reg;
